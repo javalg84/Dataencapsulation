@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lg.sjfz_json.mapper.EbookEntryMapper">
+  <select id="getEbook"  resultType="com.lg.sjfz_json.entity.vo.Ebook">
+SELECT ee.`id`,ec.`name`,ee.`title`,ee.`summary`,ee.`uploaduser`,ee.`createdate`
+
+ FROM `ebook_category` ec , `ebook_entry` ee where ec.`id`=ee.`categoryId`
+  </select>
+</mapper>
