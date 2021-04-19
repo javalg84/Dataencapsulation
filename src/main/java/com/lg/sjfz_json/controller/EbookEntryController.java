@@ -6,6 +6,9 @@ import com.lg.sjfz_json.entity.vo.Ebook;
 import com.lg.sjfz_json.service.EbookEntryService;
 import com.lg.sjfz_json.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +26,10 @@ import java.util.List;
 public class EbookEntryController {
     @Autowired
     private EbookEntryService ebookEntryService;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
+
     //测试框架
         @GetMapping("all")
     public R all(){
@@ -34,8 +41,18 @@ public class EbookEntryController {
    //数据封装
     @GetMapping("getEbook")
     public R getEbook(){
-       List<Ebook>  ebook= ebookEntryService.getEbook();
 
+       /* ValueOperations<String,Object> valueOperations = redisTemplate.opsForValue();
+        //获取redis缓存中数据
+        List<Ebook> book = (List<Ebook>)valueOperations.get("ebook");
+
+        List<Ebook>  ebook= ebookEntryService.getEbook();
+            if (CollectionUtils.isEmpty(book)) {
+                redisTemplate.opsForValue().set("ebook", ebook);
+            }*/
+
+        List<Ebook>  ebook= ebookEntryService.getEbook();
+       // redisTemplate.opsForValue().set("ebook", ebook);
             return R.ok().data("ebook",ebook);
     }
 
