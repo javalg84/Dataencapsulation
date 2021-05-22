@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-03-27
  */
 @RestController
-@RequestMapping("/sjfz_json/ebook-category")
 public class EbookCategoryController {
 
 }
